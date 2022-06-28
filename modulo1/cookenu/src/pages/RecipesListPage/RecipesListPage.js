@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
-const RecupesListPage = () => {
-    return(
+const RecipesListPage = () => {
+    return (
         <div>
             <h1>RecipesListPage</h1>
         </div>
     )
 }
 
-export default RecupesListPage
+export default RecipesListPage
