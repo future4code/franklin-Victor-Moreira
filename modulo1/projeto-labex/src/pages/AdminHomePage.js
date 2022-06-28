@@ -15,7 +15,7 @@ function AdminHomePage() {
         <button onClick={() => goToLoginPage(navigate)}>Logout</button>
       </div>
       <div>
-        Card de viagens
+        
       </div>
     </div>
   );
