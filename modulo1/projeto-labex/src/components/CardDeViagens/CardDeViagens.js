@@ -1,13 +1,14 @@
 import React from "react";
+import { StyledCardDeViagens } from "./styled";
 
 export const CardDeViagens = (props) => {
     return(
-        <div>
-            <p>Nome: {props.viagem.name}</p>
-            <p>Descrição: {props.viagem.description}</p>
-            <p>Planeta: {props.viagem.planet}</p>
-            <p>Duração: {props.viagem.durationInDays}</p>
-            <p>Data: {props.viagem.date}</p>
-        </div>
+        <StyledCardDeViagens>
+            <p><strong>Nome:</strong> {props.viagem.name}</p>
+            <p><strong>Descrição:</strong>{props.viagem.description}</p>
+            <p><strong>Planeta:</strong>{props.viagem.planet}</p>
+            <p><strong>Duração:</strong>{props.viagem.durationInDays}</p>
+            <p><strong>Data:</strong>{props.viagem.date}</p>
+        </StyledCardDeViagens>
     )
 }
