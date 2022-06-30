@@ -3,22 +3,31 @@ import { InputContainer } from "./styled";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import useForm from "../../hooks/useForm";
-import { login } from "../../services/user"
+import { signUp } from "../../services/user";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({setRightButtonText }) => {
-
-    const [form, onChange, clear] = useForm({ email: "", password: "" })
+const SignUpForm = ({ setRightButtonText }) => {
     const navigate = useNavigate()
+    const [form, onChange, clear] = useForm({ email: "", password: "" })
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, clear, navigate, setRightButtonText)
+        signUp(form, clear, navigate, setRightButtonText)
     }
 
     return (
         <InputContainer>
             <form onSubmit={onSubmitForm}>
+                <TextField
+                    name={"name"}
+                    value={form.name}
+                    onChange={onChange}
+                    label={"Nome"}
+                    fullWidth
+                    margin={"normal"}
+                    required
+                    type={"text"}
+                />
                 <TextField
                     name={"email"}
                     value={form.email}
@@ -35,8 +44,8 @@ const LoginForm = ({setRightButtonText }) => {
                     onChange={onChange}
                     label={"Senha"}
                     fullWidth
-                    margin={"normal"}
                     required
+                    margin={"normal"}
                     type={"password"}
                 />
                 <Button
@@ -44,11 +53,11 @@ const LoginForm = ({setRightButtonText }) => {
                     type={"submit"}
                     fullWidth
                 >
-                    Fazer Login!
+                    Fazer Cadastro
                 </Button>
             </form>
         </InputContainer>
     )
 }
 
-export default LoginForm
+export default SignUpForm
