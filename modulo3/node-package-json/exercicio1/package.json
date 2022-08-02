@@ -1,0 +1,12 @@
+{
+  "name": "aula-node-exercicio-1",
+  "version": "1.0.0",
+  "description": "Recebe um nome e uma idade como parâmetros e os imprime na tela.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Ramon",
+  "license": "ISC"
+}
