@@ -1,5 +1,10 @@
 import express, {Express, Request, Response} from "express";
+import knex from "knex";
+import dotenv from "dotenv";
 import cors from "cors";
+import connection from "./concection"
+
+dotenv.config()
 
 const app: Express = express();
 
@@ -10,19 +15,40 @@ var users: Array<userType> = []
 app.use(express.json());
 app.use(cors());
 
-app.post('/user', (request: Request, response: Response) => {
+// app.post('/user', (request: Request, response: Response) => {
 
-    const { name, nickname, email }: userType = request.body
-    const userId: number = users.length + 1
+//     const { name, nickname, email }: userType = request.body
+//     const userId: number = users.length + 1
 
-    users.push({ userId, name, nickname, email })
-    users.filter(user => user.userId === userId)
+//     users.push({ userId, name, nickname, email })
+//     users.filter(user => user.userId === userId)
 
-    // response.status(201).send("Usuário cadastrado com sucesso!")
-    response.status(201).send(users)
+//     // response.status(201).send("Usuário cadastrado com sucesso!")
+//     response.status(201).send(users)
+// })
+
+app.post("/users", async (request: Request, response: Response) => {
+    try {
+        await connection.raw(
+        `INSERT INTO TodoListUser
+            (id, name, nickname, email)
+            VALUES (
+                ${Date.now().toString()},
+                "${request.body.name}",
+                ${request.body.nickname},
+                "${request.body.email}",
+            );
+        `)
+
+        response.status(201).send("Sucess!")
+    } catch (error) {
+        console.log(error);
+        response.status(500).send("An unexoected error ocurred")
+    }
+
 })
 
-app.get('/user/:userId', (request: Request, response: Response) => {
+app.get('/users/:userId', (request: Request, response: Response) => {
     
     const userId: number = Number(request.params.userId)
     
@@ -33,7 +59,7 @@ app.get('/user/:userId', (request: Request, response: Response) => {
     response.status(201).send(result)
 })
 
-app.put('/user/edit/:userId', (request: Request, response: Response) => {
+app.put('/users/edit/:userId', (request: Request, response: Response) => {
     
     const userId: number = Number(request.params.userId)
     const { name, nickname}: userType = request.body
