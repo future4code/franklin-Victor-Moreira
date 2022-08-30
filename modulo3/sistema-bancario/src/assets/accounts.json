@@ -1,0 +1,53 @@
+[
+    {
+        "idAccount": "1",
+        "name": "Clarke Orozco",
+        "cpf": "48615365487",
+        "birthDate": "1956-01-25",
+        "balance": 1200.00,
+        "extract": [
+            {
+                "value": 30.00,
+                "purchaseDate": "2021-07-18"
+            },
+            {
+                "value": 100.00,
+                "purchaseDate": "2022-03-26"
+            },
+            {
+                "value": 2.00,
+                "purchaseDate": "2022-07-27"
+            }
+        ]
+    },
+    {
+        "idAccount": "2",
+        "name": "Aislinn Buchanan",
+        "cpf": "12558996452",
+        "birthDate": "1983-01-30",
+        "balance": 100.00,
+        "extract": [
+            {
+                "value": 25.00,
+                "purchaseDate": "2021-04-04"
+            }
+        ]
+    },
+    {
+        "idAccount": "3",
+        "name": "Dawson Goldsmith",
+        "cpf": "98625437152",
+        "birthDate": "2009-07-15",
+        "balance": 500.00,
+        "extract": [
+            {
+                "value": 45.00,
+                "purchaseDate": "2022-04-19"
+            },
+            {
+                "value": 25.00,
+                "purchaseDate": "2022-08-11"
+            }
+        ]
+    }
+]
