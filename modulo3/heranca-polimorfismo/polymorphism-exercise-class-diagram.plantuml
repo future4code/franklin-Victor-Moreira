@@ -1,0 +1,87 @@
+@startuml polymorphism-exercise-class-diagram
+
+title Diagrama de classes dos exercícios de polimorfismo
+
+left to right direction
+
+interface Client {
+    String name
+    Number registrationNumber
+    Number consimedEnergy
+
+    Number calculateBill()
+}
+
+abstract class Place {
+    # String cep
+
+    + String getCep()
+}
+
+class Recidence {
+    # Number residentsQuantity
+    + String Cep
+
+    + Number getResidentsQuantity()
+}
+
+class Commerce {
+    # Number floorsQuantity
+    + String Cep
+
+    + Number getFloorsQuantityy()
+}
+
+class Industry {
+    # Number machinesQuantity
+    + String Cep
+
+    + Number getMachinesQuantity()
+}
+
+Class Recidence extends Place
+Class Commerce extends Place
+Class Industry extends Place
+
+class ResidentialClient {
+    + String name
+    + Number registrationNumber
+    + Number consumedEnergy
+    - String cpf
+    Number residentsQuantity
+    String cep
+
+    + String getCpf()
+    + Number calculateBill()
+}
+
+class CommercialClient {
+    + String name
+    + Number registrationNumber
+    + Number consumedEnergy
+    - String cnpj
+    Number floorsQuantity
+    String cep
+
+    + String getCnpj()
+    + Number calculateBill()
+}
+
+class IndustrialClient {
+    + String name
+    + Number registrationNumber
+    + Number consumedEnergy
+    - String industryNumber
+    Number machinesQuantity
+    String cep
+
+    + String getIndustryNumber()
+    + Number calculateBill()
+}
+
+Class ResidentialClient extends Recidence implements Client
+Class CommercialClient extends Commerce implements Client
+Class IndustrialClient extends Industry implements Client
+
+
+@enduml

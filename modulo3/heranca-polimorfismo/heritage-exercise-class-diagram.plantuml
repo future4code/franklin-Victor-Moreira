@@ -1,0 +1,28 @@
+@startuml heritage-class-diagram
+
+title Diagrama de classes dos exercícios de herança
+
+left to right direction
+
+class User {
+    -String id
+    -String email
+    -String name
+    -String password
+
+    + String getId()
+    + String getEmal()
+    + String getName()
+    + String introduceYourself()
+}
+
+class Customer {
+    + Number purchaseTotal
+    - Number creditCard
+
+    + String getCreditCard()
+}
+
+Class Customer extends User
+
+@enduml
