@@ -1,17 +1,22 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
+import { GetUsersInputDto } from "../dto/GetUsersInputDto";
+import { SignupInputDto } from "../dto/SignupInputDto";
 
 export class UserController {
+    constructor(
+        protected userBusiness: UserBusiness
+    ) { }
+    
     public signup = async (req: Request, res: Response) => {
         try {
-            const input: any = {
+            const input: SignupInputDto = {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password
             }
 
-            const userBusiness = new UserBusiness()
-            const response = await userBusiness.signup(input)
+            const response = await this.userBusiness.signup(input)
 
             res.status(201).send(response)
         } catch (error) {
@@ -32,13 +37,12 @@ export class UserController {
                 password: req.body.password
             }
 
-            const userBusiness = new UserBusiness()
-            const response = await userBusiness.login(input)
+            const response = await this.userBusiness.login(input)
 
             res.status(200).send(response)
         } catch (error) {
             console.log(error)
-            
+
             if (error instanceof Error) {
                 return res.status(400).send({ message: error.message })
             }
@@ -49,7 +53,7 @@ export class UserController {
 
     public getUsers = async (req: Request, res: Response) => {
         try {
-            const input: any = {
+            const input: GetUsersInputDto = {
                 token: req.headers.authorization,
                 search: req.query.search as string,
                 order: req.query.order as string,
@@ -58,13 +62,12 @@ export class UserController {
                 page: req.query.page as string
             }
 
-            const userBusiness = new UserBusiness()
-            const response = await userBusiness.getUsers(input)
+            const response = await this.userBusiness.getUsers(input)
 
             res.status(200).send(response)
         } catch (error) {
             console.log(error)
-            
+
             if (error instanceof Error) {
                 return res.status(400).send({ message: error.message })
             }
@@ -80,13 +83,12 @@ export class UserController {
                 idToDelete: req.params.id
             }
 
-            const userBusiness = new UserBusiness()
-            const response = await userBusiness.deleteUser(input)
+            const response = await this.userBusiness.deleteUser(input)
 
             res.status(200).send(response)
         } catch (error) {
             console.log(error)
-            
+
             if (error instanceof Error) {
                 return res.status(400).send({ message: error.message })
             }
@@ -105,13 +107,12 @@ export class UserController {
                 password: req.body.password
             }
 
-            const userBusiness = new UserBusiness()
-            const response = await userBusiness.editUser(input)
+            const response = await this.userBusiness.editUser(input)
 
             res.status(200).send(response)
         } catch (error) {
             console.log(error)
-            
+
             if (error instanceof Error) {
                 return res.status(400).send({ message: error.message })
             }

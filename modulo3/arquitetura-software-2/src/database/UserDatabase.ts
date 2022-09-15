@@ -1,3 +1,4 @@
+import { GetUsersInputDbDto } from "../dto/GetUsersInputDbDto"
 import { IUserDB, User } from "../models/User"
 import { BaseDatabase } from "./BaseDatabase"
 
@@ -27,7 +28,7 @@ export class UserDatabase extends BaseDatabase {
             .insert(userDB)
     }
 
-    public getUsers = async (input: any) => {
+    public getUsers = async (input: GetUsersInputDbDto) => {
         const search = input.search
         const order = input.order
         const sort = input.sort
@@ -41,7 +42,7 @@ export class UserDatabase extends BaseDatabase {
             .orderBy(order, sort)
             .limit(limit)
             .offset(offset)
-        
+
         return usersDB
     }
 
@@ -69,7 +70,7 @@ export class UserDatabase extends BaseDatabase {
             password: user.getPassword(),
             role: user.getRole()
         }
-        
+
         await BaseDatabase
             .connection(UserDatabase.TABLE_USERS)
             .update(userDB)
