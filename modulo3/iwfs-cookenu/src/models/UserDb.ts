@@ -1,6 +1,6 @@
 import { USER_ROLES } from "./USER_ROLES";
 
-export interface IUserDB {
+export interface UserDB {
     id: string,
     name: string,
     email: string,
