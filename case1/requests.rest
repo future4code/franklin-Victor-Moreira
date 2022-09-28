@@ -2,18 +2,19 @@
 GET http://localhost:3003/ping
 
 ### Criar uma competição
-POST http://localhost:3003/contest
+POST http://localhost:3003/competition
 Content-Type: application/json
 
 {
-    "title": "100m classificatoria 1"
+    "title": "100m rasos classificatoria 1",
+    "status": true
 }
 
 ### Cadastrar resultados para uma competição
-POST http://localhost:3003/contest/001
+POST http://localhost:3003/competition/001
 
 ### Finalizar uma competição
-PUT http://localhost:3003/contest/001
+PUT http://localhost:3003/competition/001
 
 ### Retornar o ranking da competição
-GET http://localhost:3003/contest/001
+GET http://localhost:3003/competition/001
