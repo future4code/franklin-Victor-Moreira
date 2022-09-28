@@ -1,0 +1,19 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Criar uma competição
+POST http://localhost:3003/contest
+Content-Type: application/json
+
+{
+    "title": "100m classificatoria 1"
+}
+
+### Cadastrar resultados para uma competição
+POST http://localhost:3003/contest/001
+
+### Finalizar uma competição
+PUT http://localhost:3003/contest/001
+
+### Retornar o ranking da competição
+GET http://localhost:3003/contest/001
