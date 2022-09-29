@@ -12,6 +12,14 @@ Content-Type: application/json
 
 ### Cadastrar resultados para uma competição
 POST http://localhost:3003/competition/001
+Content-Type: application/json
+
+{
+    "competition": "100m classificatoria 1", 
+    "athlete": "Joao das Neves", 
+    "value": "10.234", 
+    "unit": "s"
+}
 
 ### Finalizar uma competição
 PUT http://localhost:3003/competition/001

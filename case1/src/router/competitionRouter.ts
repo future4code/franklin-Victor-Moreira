@@ -16,19 +16,7 @@ const competitionController = new CompetitionController(
 
 competitionRouter.post('/', competitionController.createCompetition)
 
-competitionRouter.post('/:id', (request: Request, response: Response) => {
-    try {
-        response.status(201).send('Pong1!')
-    } catch (error) {
-        console.log(error)
-
-        if (error instanceof Error) {
-            return response.status(400).send({ message: error.message })
-        }
-
-        response.status(500).send({ message: "Erro inesperado" })
-    }
-})
+competitionRouter.post('/:id', competitionController.registerResult)
 
 competitionRouter.put('/:id', (request: Request, response: Response) => {
     try {
