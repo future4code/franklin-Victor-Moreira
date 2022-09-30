@@ -1,21 +1,23 @@
 import { BaseDatabase } from "../BaseDatabase"
-import { CompetitionDatabase } from "../CompetitionDatabase"
-import { competition } from "./data"
+import { CompetitionDatabase } from "../CompetitionDatabase";
+import { competitionsData } from "./competitionsData"
+import { resultsData } from "./resultsData"
 
 export class Migrations extends BaseDatabase {
-
-    public static TABLE_COMPETITION = "competition"
-
     execute = async () => {
         try {
-            console.log("Creating tables...")
+            console.log("Droping tables if exists...");
             await this.dropTables()
+            console.log("Tables droped successfully.")
+
+            console.log("Creating tables...")
             await this.createCompetitionTable()
             await this.createResultsTable()
             console.log("Tables created successfully.")
 
             console.log("Populating tables...")
-            await this.insertData()
+            await this.insertCompetitionData()
+            await this.insertResultsData()
             console.log("Tables populated successfully.")
 
             console.log("Migrations completed.")
@@ -50,19 +52,26 @@ export class Migrations extends BaseDatabase {
         await BaseDatabase.connection.raw(`        
         CREATE TABLE IF NOT EXISTS ${CompetitionDatabase.TABLE_RESULTS}(
             id VARCHAR(255) PRIMARY KEY,
+            idCompetition VARCHAR(255) NOT NULL,
             competition VARCHAR(255) NOT NULL,
             athlete VARCHAR(255) NOT NULL,
-            value VARCHAR(255) NOT NULL,
+            value FLOAT NOT NULL,
             unit VARCHAR(255) NOT NULL,
-            FOREIGN KEY (id) REFERENCES ${CompetitionDatabase.TABLE_COMPETITION}(id)
+            FOREIGN KEY (idCompetition) REFERENCES ${CompetitionDatabase.TABLE_COMPETITION}(id)
         );
         `)
     }
 
-    insertData = async () => {
+    insertCompetitionData = async () => {
         await BaseDatabase
             .connection(CompetitionDatabase.TABLE_COMPETITION)
-            .insert(competition)
+            .insert(competitionsData)
+    }
+
+    insertResultsData = async () => {
+        await BaseDatabase
+            .connection(CompetitionDatabase.TABLE_RESULTS)
+            .insert(resultsData)
     }
 }
 

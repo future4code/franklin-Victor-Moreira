@@ -18,30 +18,6 @@ competitionRouter.post('/', competitionController.createCompetition)
 
 competitionRouter.post('/:id', competitionController.registerResult)
 
-competitionRouter.put('/:id', (request: Request, response: Response) => {
-    try {
-        response.status(201).send('Pong2!')
-    } catch (error) {
-        console.log(error)
+competitionRouter.put('/:id', competitionController.endCompetition)
 
-        if (error instanceof Error) {
-            return response.status(400).send({ message: error.message })
-        }
-
-        response.status(500).send({ message: "Erro inesperado" })
-    }
-})
-
-competitionRouter.get('/:id', (request: Request, response: Response) => {
-    try {
-        response.status(201).send('Pong3!')
-    } catch (error) {
-        console.log(error)
-
-        if (error instanceof Error) {
-            return response.status(400).send({ message: error.message })
-        }
-
-        response.status(500).send({ message: "Erro inesperado" })
-    }
-})
+competitionRouter.get('/:id', competitionController.rankingCompetition)
