@@ -6,23 +6,28 @@ POST http://localhost:3003/competition
 Content-Type: application/json
 
 {
-    "title": "100m rasos classificatoria 1",
-    "status": true
+    "title": "Maratona"
 }
 
 ### Cadastrar resultados para uma competição
-POST http://localhost:3003/competition/001
+POST http://localhost:3003/competition/33762008-4913-44a5-8fe6-3950e3b64348
 Content-Type: application/json
 
 {
-    "competition": "100m classificatoria 1", 
-    "athlete": "Joao das Neves", 
-    "value": "10.234", 
-    "unit": "s"
+    "competition": "Lançamento de dardo", 
+    "athlete": "Julian Weber", 
+    "value": 85.30, 
+    "unit": "points"
 }
 
 ### Finalizar uma competição
-PUT http://localhost:3003/competition/001
+PUT http://localhost:3003/competition/3ae1fb1b-db09-43ab-9305-ba960028dec5
 
 ### Retornar o ranking da competição
-GET http://localhost:3003/competition/001
+GET http://localhost:3003/competition/3ae1fb1b-db09-43ab-9305-ba960028dec5
+Content-Type: application/json
+
+#  resultsOrder:  true para crescente | false para decrescente
+{
+    "resultsOrder": false
+}

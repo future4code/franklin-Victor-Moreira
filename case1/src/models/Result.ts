@@ -1,14 +1,19 @@
 export class Result {
     constructor(
         private id: string,
+        private idCompetition: string,
         private competition: string,
         private athlete: string,
-        private value: string,
+        private value: number,
         private unit: string
     ) { }
 
     public getId = () => {
         return this.id
+    }
+
+    public getIdCompetition = () => {
+        return this.idCompetition
     }
 
     public getCompetition = () => {
@@ -35,7 +40,7 @@ export class Result {
         this.athlete = newAthlete
     }
 
-    public setValue = (newValue: string) => {
+    public setValue = (newValue: number) => {
         this.value = newValue
     }
 

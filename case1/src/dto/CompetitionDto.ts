@@ -1,4 +1,3 @@
 export interface CompetitionDto {
-    title: string,
-    status: boolean
+    title: string
 }
