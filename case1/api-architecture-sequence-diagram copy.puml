@@ -1,0 +1,24 @@
+@startuml
+
+title Diagrama de sequência da arquitetura do projeto.
+
+actor Cliente as client
+
+box "Serviço interno" #White
+participant Controller as controller
+participant Business as business
+participant Database as database
+end box
+
+database MySQL as mysql
+
+client -> controller: Realização da requisição
+controller --> business
+business --> database
+database -> mysql --++ #Black : Persistência dos dados
+database <- mysql --
+business <-- database
+controller <-- business
+controller -> client: Retorno da resposta
+
+@enduml
