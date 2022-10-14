@@ -1,4 +1,4 @@
-### 1) Signup
+### Register contributor
 POST http://localhost:3003/contributors
 Content-Type: application/json
 
@@ -7,6 +7,3 @@ Content-Type: application/json
     "lastName": "Nara",
     "participation": 4
 }
-
-### 2) Get users
-GET http://localhost:3004/users

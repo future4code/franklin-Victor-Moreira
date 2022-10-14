@@ -16,10 +16,10 @@ export class ContributorDatabase extends BaseDatabase {
             .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
             .insert(contributorDb)
 
-        const contributtorsDb: Array<ContributorDb> = await BaseDatabase
+        const contributorsDb: Array<ContributorDb> = await BaseDatabase
             .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
             .select()
 
-        return contributtorsDb
+        return {contributorsDb}
     }
 }

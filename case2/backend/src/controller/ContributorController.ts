@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
 import ContributorBusiness from "../business/ContributorBusiness"
-import { ContributorDatabase } from "../database/ContributorDatabase"
-import { RegisterInputDto } from "../dto/RegisterInputDto"
-import { Contributor } from "../model/Contributor"
 
 export class ContributorController {
     constructor(
