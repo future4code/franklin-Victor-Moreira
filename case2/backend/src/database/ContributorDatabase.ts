@@ -7,7 +7,6 @@ export class ContributorDatabase extends BaseDatabase {
 
     public addContributor = async (contributor: Contributor) => {
         const contributorDb: ContributorDb = {
-            id: contributor.getId(),
             first_name: contributor.getFirstName(),
             last_name: contributor.getLastName(),
             participation: contributor.getParticipation()
@@ -16,6 +15,11 @@ export class ContributorDatabase extends BaseDatabase {
         await BaseDatabase
             .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
             .insert(contributorDb)
-    }
 
+        const contributtorsDb: Array<ContributorDb> = await BaseDatabase
+            .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
+            .select()
+
+        return contributtorsDb
+    }
 }

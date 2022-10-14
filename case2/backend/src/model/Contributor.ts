@@ -1,14 +1,9 @@
 export class Contributor {
     constructor(
-        private id: string,
         private firstName: string,
         private lastName: string,
         private participation: number
     ) { }
-
-    public getId = () => {
-        return this.id
-    }
 
     public getFirstName = () => {
         return this.firstName
@@ -20,10 +15,6 @@ export class Contributor {
 
     public getParticipation = () => {
         return this.participation
-    }
-
-    public setId = (newId: string) => {
-        this.id = newId
     }
 
     public setFirstName = (newFirstName: string) => {

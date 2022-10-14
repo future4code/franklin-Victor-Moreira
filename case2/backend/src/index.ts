@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import { Contributor } from './model/Contributor'
+import { ContributorDatabase } from './database/ContributorDatabase'
+import { contributorRouter } from './router/contributorRouter'
 
 const app = express()
 const port = 3003
@@ -8,21 +10,8 @@ const port = 3003
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, world!')
+app.listen(process.env.PORT || 3003, () => {
+    console.log(`Server is running in http://localhost:${process.env.PORT || 3003}`);
 })
 
-const contributors: Array<Contributor> = []
-
-app.post('/', (request: Request, response: Response) => {
-
-    const contributor: Contributor = request.body
-
-    contributors.push(contributor)
-
-    response.status(201).send(contributors)
-})
-
-app.listen(port, () => {
-    console.log(`Server is running in http://localhost:${port}`);
-})
+app.use("/contributors", contributorRouter)

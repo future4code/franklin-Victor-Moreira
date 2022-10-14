@@ -29,7 +29,7 @@ class Migrations extends BaseDatabase {
         DROP TABLE IF EXISTS ${ContributorDatabase.TABLE_CONTRIBUTOR};
         
         CREATE TABLE IF NOT EXISTS ${ContributorDatabase.TABLE_CONTRIBUTOR}(
-            id VARCHAR(255) PRIMARY KEY,
+            id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
             first_name VARCHAR(255) NOT NULL,
             last_name VARCHAR(255) NOT NULL,
             participation FLOAT NOT NULL
