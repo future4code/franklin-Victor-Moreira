@@ -11,4 +11,5 @@ const contributorController = new ContributorController(
     )
 )
 
+contributorRouter.get("/", contributorController.getContributors)
 contributorRouter.post("/", contributorController.register)

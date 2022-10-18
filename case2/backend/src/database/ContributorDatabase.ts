@@ -22,4 +22,13 @@ export class ContributorDatabase extends BaseDatabase {
 
         return {contributorsDb}
     }
+
+    public getContributors = async () => {
+        const contributorsDb: Array<ContributorDb> = await BaseDatabase
+            .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
+            .select()
+
+        return {contributorsDb}
+    }
+
 }

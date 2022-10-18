@@ -30,9 +30,9 @@ class Migrations extends BaseDatabase {
         
         CREATE TABLE IF NOT EXISTS ${ContributorDatabase.TABLE_CONTRIBUTOR}(
             id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            first_name VARCHAR(255) NOT NULL,
-            last_name VARCHAR(255) NOT NULL,
-            participation FLOAT NOT NULL
+            first_name VARCHAR(255),
+            last_name VARCHAR(255),
+            participation FLOAT
         );
         `)
     }
