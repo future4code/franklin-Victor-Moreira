@@ -1,11 +1,13 @@
+import { ThemeProvider } from '@emotion/react';
 import React from 'react'
+import theme from './constants/theme';
 import Router from './router/Router'
 
 function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Router />
-    </div>
+    </ThemeProvider>
   )
 }
 

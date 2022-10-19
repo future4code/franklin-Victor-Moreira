@@ -12,6 +12,11 @@ export const users: ContributorDb[] = [
         participation: 7
     },
     {
+        first_name: "Tsunade",
+        last_name: "Senju",
+        participation: 3
+    },
+    {
         first_name: "Itachi",
         last_name: "Uchiha",
         participation: 5
@@ -22,8 +27,18 @@ export const users: ContributorDb[] = [
         participation: 2
     },
     {
+        first_name: "Hinata",
+        last_name: "Hyuga",
+        participation: 1
+    },
+    {
         first_name: "Maito",
         last_name: "Gai",
         participation: 8
+    },
+    {
+        first_name: "Rock",
+        last_name: "Lee",
+        participation: 12
     }
 ]

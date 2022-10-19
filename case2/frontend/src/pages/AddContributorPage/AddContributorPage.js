@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from "react"
 import { useForm } from "../../hooks/useForm";
 import axios from "axios";
+import Button from '@mui/material/Button'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Chart, PieSeries, Legend } from '@devexpress/dx-react-chart-material-ui';
+import { Animation } from '@devexpress/dx-react-chart'
+import { AppBar } from "@mui/material";
+import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import { StyledToolbar } from "../../components/Header/styled";
+import { StyledBox } from "../../components/Main/styled";
+import { StyledDashboard } from "../../components/Dashboard/styled";
+import { StyledTextField } from "../../components/TextField/styled";
+import { BASE_URL } from "../../constants/urls";
 
 const AddContributorPage = () => {
 
     const [contributors, setContributors] = useState([])
     const { form, onChange, cleanFields } = useForm({})
-
-    console.log(contributors);
+    const data = []
+    var totalContribution = 0
 
     const getContributors = () => {
-        axios.get('http://localhost:3003/contributors', form)
+        axios.get(`${BASE_URL}/contributors`, form)
             .then((response) => {
                 setContributors(response.data.contributorsDb)
             })
@@ -20,7 +38,17 @@ const AddContributorPage = () => {
     }
 
     const postContributor = () => {
-        axios.post('http://localhost:3003/contributors', form)
+        axios.post(`${BASE_URL}/contributors`, form)
+            .then((response) => {
+                setContributors(response.data.contributorsDb)
+            })
+            .catch((error) => {
+                console.log(error.response)
+            })
+    }
+
+    const deleteContributor = (id) => {
+        axios.delete(`${BASE_URL}/contributors/${id}`)
             .then((response) => {
                 setContributors(response.data.contributorsDb)
             })
@@ -31,54 +59,77 @@ const AddContributorPage = () => {
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        console.log(form);
         postContributor()
         cleanFields()
     }
 
-    const renderContributorList = contributors.map((contributor) => {
-        return (
-            <tr>
-                <td>{contributor.id}</td>
-                <td>{contributor.first_name}</td>
-                <td>{contributor.last_name}</td>
-                <td>{contributor.participation}</td>
-            </tr>
-        )
+    contributors.map((contributor) => {
+        return totalContribution += contributor.participation
     })
 
-    console.log(renderContributorList);
+    const renderContributorList = contributors.map((contributor) => {
+        data.push({
+            argument: contributor.first_name,
+            value: contributor.participation
+        })
+
+        return (
+            <TableRow>
+                <TableCell>{contributor.id}</TableCell>
+                <TableCell>{contributor.first_name}</TableCell>
+                <TableCell>{contributor.last_name}</TableCell>
+                <TableCell>{((contributor.participation / totalContribution) * 100).toFixed(2)}%</TableCell>
+                <TableCell>
+                    <IconButton aria-label="delete" onClick={() => deleteContributor(contributor.id)} ><DeleteIcon /></IconButton>
+                </TableCell>
+            </TableRow>
+        )
+    })
 
     useEffect(() => { getContributors() }, [])
 
     return (
         <div>
-            <div>
+            <AppBar position="static">
+                <StyledToolbar onSubmit={onSubmitForm}>
+                    <StyledTextField placeholder='First name' type="text" id='firstName' name='firstName' value={form.firstName} onChange={onChange} color='primary' variant="outlined" required/>
+                    <StyledTextField placeholder='Last name' type="text" id='lastName' name='lastName' variant="outlined" value={form.lastName} onChange={onChange} required/>
+                    <StyledTextField placeholder='Participation' type="number" id='participation' name='participation' variant="outlined" value={form.participation} onChange={onChange} required/>
+                    <Button color='inherit' type='submit' variant="outlined">Send</Button>
+                </StyledToolbar>
+            </AppBar>
 
-                <form onSubmit={onSubmitForm}>
-                    <input type="text" id='firstName' name='firstName' value={form.firstName} onChange={onChange} />
-                    <input type="text" id='lastName' name='lastName' value={form.lastName} onChange={onChange} />
-                    <input type="number" id='participation' name='participation' value={form.participation} onChange={onChange} />
-                    <button type='submit'>Send</button>
-                </form>
+            <StyledBox>
+                <h1>Dashboard Cubo Network</h1>
 
-                <h1>Data</h1>
+                <p>Add your data in the form above with the amount of hours worked and see your contribution percentage.</p>
 
-                <p>Commodo laboris exercitation excepteur excepteur duis veniam minim consequat exercitation aliquip excepteur et pariatur.</p>
+                <StyledDashboard>
+                    <TableContainer>
+                        <Table sx={{ maxWidth: 700 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    <TableCell></TableCell>
+                                    <TableCell>First name</TableCell>
+                                    <TableCell>Last name</TableCell>
+                                    <TableCell>Participation</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {renderContributorList}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
 
-                {
-                    <table>
-                        <tr>
-                            <th></th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Participation</th>
-                        </tr>
-
-                        {renderContributorList}
-                    </table>
-                }
-            </div>
+                    <Box>
+                        <Chart type="pie" width={500} height={500} data={data}>
+                            <PieSeries valueField="value" argumentField="argument" innerRadius={.5} />
+                            <Animation duration={500} />
+                            <Legend />
+                        </Chart>
+                    </Box>
+                </StyledDashboard>
+            </StyledBox>
         </div>
     )
 }

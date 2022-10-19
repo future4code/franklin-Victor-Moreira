@@ -33,4 +33,22 @@ export default class ContributorBusiness {
 
         return response
     }
+
+    public deleteContributor = async (input: any) => {
+        const idToDelete = input.idToDelete
+
+        const contributorDb = await this.contributorDatabase.findById(idToDelete)
+
+        if (!contributorDb) {
+            throw new Error("Usuário a ser deletado não encontrado")
+        }
+
+        const response = await this.contributorDatabase.deleteContributor(idToDelete)
+
+        // const response = {
+        //     message: "Contribuidor deletado com sucesso"
+        // }
+
+        return response
+    }
 }

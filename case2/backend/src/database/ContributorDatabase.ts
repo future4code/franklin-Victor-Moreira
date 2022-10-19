@@ -16,11 +16,7 @@ export class ContributorDatabase extends BaseDatabase {
             .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
             .insert(contributorDb)
 
-        const contributorsDb: Array<ContributorDb> = await BaseDatabase
-            .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
-            .select()
-
-        return {contributorsDb}
+        return this.getContributors()
     }
 
     public getContributors = async () => {
@@ -28,7 +24,24 @@ export class ContributorDatabase extends BaseDatabase {
             .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
             .select()
 
-        return {contributorsDb}
+        return { contributorsDb }
     }
 
+    public deleteContributor = async (id: string) => {
+        await BaseDatabase
+            .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
+            .delete()
+            .where({ id })
+
+        return this.getContributors()
+    }
+
+    public findById = async (id: string) => {
+        const contributorsDb: Array<ContributorDb> = await BaseDatabase
+            .connection(ContributorDatabase.TABLE_CONTRIBUTOR)
+            .select()
+            .where({ id })
+
+        return contributorsDb[0]
+    }
 }
